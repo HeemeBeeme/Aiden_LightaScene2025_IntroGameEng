@@ -38,8 +38,14 @@ public class Controller : MonoBehaviour
     float m_VerticalAngle, m_HorizontalAngle;
     public float Speed { get; private set; } = 0.0f;
 
+    public float StaminaRefillDelay = 0;
+
     public bool LockControl { get; set; }
     public bool CanPause { get; set; } = true;
+
+    public bool RecentlyRan = false;
+
+    public bool HasStamina = true;
 
     public bool Grounded => m_Grounded;
 
@@ -115,14 +121,47 @@ public class Controller : MonoBehaviour
                 loosedGrounding = true;                
             }
 
-            bool running = Input.GetKey(KeyCode.LeftShift);
-            float actualSpeed = running ? RunningSpeed : PlayerSpeed;
+            if(Stamina > 0)
+            {
+                HasStamina = true;
+            }
+            else if(Stamina <= 0)
+            {
+                Stamina = 0;
+                HasStamina = false;
+            }
+
+                bool running = Input.GetKey(KeyCode.LeftShift);
+            float actualSpeed = running && HasStamina ? RunningSpeed : PlayerSpeed;
 
             if(running)
             {
-                Stamina -= 1f;
+                Stamina -= 1;
                 SprintStamina.value = Stamina;
+                RecentlyRan = true;
+            }
+            else if(!running)
+            {
+                if (RecentlyRan)
+                {
+                    StaminaRefillDelay += Time.time * 0.005f;
 
+                    if(StaminaRefillDelay >= 5)
+                    {
+                        RecentlyRan = false;
+                        StaminaRefillDelay = 0;
+                    }
+                }
+                else if(!RecentlyRan)
+                {
+                    Stamina += 0.5f;
+                    SprintStamina.value = Stamina;
+
+                    if(Stamina >= 100)
+                    {
+                        Stamina = 100;
+                    }
+                }
             }
 
             if (loosedGrounding)

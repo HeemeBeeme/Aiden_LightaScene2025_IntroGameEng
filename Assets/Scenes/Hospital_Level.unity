@@ -15646,9 +15646,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -41857,7 +41857,7 @@ PrefabInstance:
     - target: {fileID: 2155358169863565897, guid: e0a781c065b735b41a847089a684852f,
         type: 3}
       propertyPath: RunningSpeed
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2155358169863565897, guid: e0a781c065b735b41a847089a684852f,
         type: 3}
@@ -41868,6 +41868,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MouseSensitivity
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155358169863565897, guid: e0a781c065b735b41a847089a684852f,
+        type: 3}
+      propertyPath: StaminaRefillDelay
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2155358169863565898, guid: e0a781c065b735b41a847089a684852f,
         type: 3}
