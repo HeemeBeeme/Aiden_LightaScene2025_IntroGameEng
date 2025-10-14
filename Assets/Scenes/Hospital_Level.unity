@@ -15447,8 +15447,8 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.9248905, g: 1, b: 0.7877358, a: 1}
-  m_Intensity: 2
-  m_Range: 10
+  m_Intensity: 3
+  m_Range: 20
   m_SpotAngle: 77.477615
   m_InnerSpotAngle: 55.077694
   m_CookieSize: 10
@@ -15478,7 +15478,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: b663732fe9cb4fd4186cc3b6e692fa83, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0

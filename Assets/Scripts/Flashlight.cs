@@ -24,13 +24,9 @@ public class Flashlight : MonoBehaviour
         {
             raycastDistance = hit.distance;
 
-            if(raycastDistance > 2)
+            if(raycastDistance > 5)
             {
-                raycastDistance = 2;
-            }
-            else if(raycastDistance < 0.5)
-            {
-                raycastDistance = 2;
+                raycastDistance = 5;
             }
 
             flashlight.intensity = Mathf.Lerp(flashlight.intensity, raycastDistance, dimTime);
