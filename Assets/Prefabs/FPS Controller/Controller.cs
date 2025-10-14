@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
+using UnityEngine.UI;
+
+
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -15,13 +21,16 @@ public class Controller : MonoBehaviour
 
     public Camera MainCamera;
 
-    public Transform CameraPosition;   
+    public Transform CameraPosition;
+
+    public UnityEngine.UI.Slider SprintStamina;
 
     [Header("Control Settings")]
     public float MouseSensitivity = 100.0f;
     public float PlayerSpeed = 5.0f;
     public float RunningSpeed = 7.0f;
-    public float JumpSpeed = 5.0f;   
+    public float JumpSpeed = 5.0f;
+    public float Stamina = 100.0f;
 
     float m_VerticalSpeed = 0.0f;
     bool m_IsPaused = false;
@@ -51,6 +60,8 @@ public class Controller : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        SprintStamina.value = Stamina;
 
         m_IsPaused = false;
         m_Grounded = true;
@@ -106,6 +117,13 @@ public class Controller : MonoBehaviour
 
             bool running = Input.GetKey(KeyCode.LeftShift);
             float actualSpeed = running ? RunningSpeed : PlayerSpeed;
+
+            if(running)
+            {
+                Stamina -= 1f;
+                SprintStamina.value = Stamina;
+
+            }
 
             if (loosedGrounding)
             {
