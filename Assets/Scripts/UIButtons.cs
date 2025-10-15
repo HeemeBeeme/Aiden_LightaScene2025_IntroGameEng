@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.SceneManagement;
 
 public class UIButtons : MonoBehaviour
@@ -6,6 +7,8 @@ public class UIButtons : MonoBehaviour
     public bool SettingsMenuActivity = false;
     public GameObject SettingsMenuObj;
     public GameObject MainUI;
+    public GameObject PlayUI;
+    public GameObject PauseText;
 
     public void StartGame()
     {
@@ -17,13 +20,13 @@ public class UIButtons : MonoBehaviour
         if(!SettingsMenuActivity)
         {
             SettingsMenuObj.SetActive(true);
-            MainUI.SetActive(false);
+            PauseText.SetActive(false);
             SettingsMenuActivity = true;
         }
         else
         {
             SettingsMenuObj.SetActive(false);
-            MainUI.SetActive(true);
+            PauseText.SetActive(true);
             SettingsMenuActivity = false;
         }
     }
@@ -31,5 +34,20 @@ public class UIButtons : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void UnpauseGame()
+    {
+        PlayUI.SetActive(true);
+        MainUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = 1;
+        Controller.Instance.m_IsPaused = false;
+    }
+
+    public void MenuButton()
+    {
+        SceneManager.LoadScene("Hospital_Menu", LoadSceneMode.Single);
     }
 }

@@ -12,7 +12,7 @@ public class SettingsMenu : MonoBehaviour
     public UnityEngine.UI.Toggle GrainToggle;
     public UnityEngine.UI.Toggle MotionBlurToggle;
 
-    public float Brightness = 1;
+    private float Brightness = 1;
 
     private bool ResetAll = false;
 
@@ -79,7 +79,7 @@ public class SettingsMenu : MonoBehaviour
 
             ResetAll = false;
         }
-        
+
         #endregion
 
     }

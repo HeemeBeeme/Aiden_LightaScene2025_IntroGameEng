@@ -24,6 +24,10 @@ public class Controller : MonoBehaviour
     public Transform CameraPosition;
 
     public UnityEngine.UI.Slider SprintStamina;
+    public GameObject PlayUI;
+    public GameObject PauseMenu;
+    public GameObject PauseTitle;
+    public GameObject SettingsMenu;
 
     [Header("Control Settings")]
     public float MouseSensitivity = 100.0f;
@@ -33,7 +37,7 @@ public class Controller : MonoBehaviour
     public float Stamina = 100.0f;
 
     float m_VerticalSpeed = 0.0f;
-    bool m_IsPaused = false;
+    public bool m_IsPaused = false;
 
     float m_VerticalAngle, m_HorizontalAngle;
     public float Speed { get; private set; } = 0.0f;
@@ -46,6 +50,8 @@ public class Controller : MonoBehaviour
     public bool RecentlyRan = false;
 
     public bool HasStamina = true;
+
+    public bool InSettings = false;
 
     public bool Grounded => m_Grounded;
 
@@ -107,6 +113,41 @@ public class Controller : MonoBehaviour
         {
             m_GroundedTimer = 0.0f;
             m_Grounded = true;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(!m_IsPaused)
+            {
+                if(!InSettings)
+                m_IsPaused = true;
+                PlayUI.SetActive(false);
+                PauseMenu.SetActive(true);
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else if (m_IsPaused)
+            {
+                if (!InSettings)
+                {
+                    m_IsPaused = false;
+                    PlayUI.SetActive(true);
+                    PauseMenu.SetActive(false);
+                    Time.timeScale = 1;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+            }
+            else if (m_IsPaused)
+            {
+                if(InSettings)
+                {
+                    SettingsMenu.SetActive(false);
+                    PauseTitle.SetActive(true);
+                }
+            }
+
+            
         }
 
         Speed = 0;
