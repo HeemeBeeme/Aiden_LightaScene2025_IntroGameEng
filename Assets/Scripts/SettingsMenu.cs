@@ -10,8 +10,11 @@ public class SettingsMenu : MonoBehaviour
 
     public UnityEngine.UI.Toggle ChromaticToggle;
     public UnityEngine.UI.Toggle GrainToggle;
+    public UnityEngine.UI.Toggle MotionBlurToggle;
 
     public float Brightness = 1;
+
+    private bool ResetAll = false;
 
     void Start()
     {
@@ -54,10 +57,40 @@ public class SettingsMenu : MonoBehaviour
 
         #endregion
 
+        #region Motion Blur
+
+        if (!Profile.TryGet<MotionBlur>(out var motionBlur))
+        {
+            motionBlur = Profile.Add<MotionBlur>(false);
+        }
+
+        motionBlur.active = MotionBlurToggle.isOn;
+
+        #endregion
+
+        #region Reset All
+
+        if(ResetAll)
+        {
+            BrightnessSlider.value = 1;
+            ChromaticToggle.SetIsOnWithoutNotify(true);
+            GrainToggle.SetIsOnWithoutNotify(true);
+            MotionBlurToggle.SetIsOnWithoutNotify(true);
+
+            ResetAll = false;
+        }
+        
+        #endregion
+
     }
 
     public void ResetBrightness()
     {
         BrightnessSlider.value = 1;
+    }
+
+    public void ResetSettings()
+    {
+        ResetAll = true;
     }
 }

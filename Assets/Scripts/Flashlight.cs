@@ -11,6 +11,8 @@ public class Flashlight : MonoBehaviour
     [SerializeField]
     Light flashlight;
 
+    public bool lightActivity = true;
+
     void Start()
     {
         flashlight = GetComponent<Light>();
@@ -20,16 +22,45 @@ public class Flashlight : MonoBehaviour
         RaycastHit hit;
         Ray raycast = new Ray(transform.position, transform.forward);
 
-        if(Physics.Raycast(raycast, out hit))
+
+        if(lightActivity)
         {
-            raycastDistance = hit.distance;
-
-            if(raycastDistance > 5)
+            if (Physics.Raycast(raycast, out hit))
             {
-                raycastDistance = 5;
-            }
+                raycastDistance = hit.distance - 0.3f;
 
-            flashlight.intensity = Mathf.Lerp(flashlight.intensity, raycastDistance, dimTime);
+                if (raycastDistance > 5)
+                {
+                    raycastDistance = 5;
+                }
+
+                flashlight.intensity = Mathf.Lerp(flashlight.intensity, raycastDistance, dimTime);
+
+                if(Input.GetKeyDown(KeyCode.F))
+                {
+                    lightActivity = false;
+                    flashlight.intensity = 0;
+                }
+            }
         }
+        else
+        {
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                Physics.Raycast(raycast, out hit);
+
+                raycastDistance = hit.distance - 0.3f;
+
+                if (raycastDistance > 5)
+                {
+                    raycastDistance = 5;
+                }
+
+                flashlight.intensity = Mathf.Lerp(flashlight.intensity, raycastDistance, dimTime);
+
+                lightActivity = true;
+            }
+        }
+        
     }
 }
