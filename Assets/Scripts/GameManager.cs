@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     public bool FilmGrainActivity = true;
     public bool MotionBlurActivity = true;
 
+    public AudioSource GameMusicSource;
+    public AudioSource FlashOnSource;
+    public AudioSource FlashOffSource;
+
     void Awake()
     {
         if(Instance == null)
@@ -22,6 +26,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
 
     }
     void Update()

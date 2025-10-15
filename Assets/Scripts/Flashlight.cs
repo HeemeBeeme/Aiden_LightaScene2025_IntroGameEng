@@ -11,6 +11,9 @@ public class Flashlight : MonoBehaviour
     [SerializeField]
     Light flashlight;
 
+    public AudioClip FlashlightOn;
+    public AudioClip FlashlightOff;
+
     public bool lightActivity = true;
 
     void Start()
@@ -23,44 +26,50 @@ public class Flashlight : MonoBehaviour
         Ray raycast = new Ray(transform.position, transform.forward);
 
 
-        if(lightActivity)
+        if(!Controller.Instance.m_IsPaused)
         {
-            if (Physics.Raycast(raycast, out hit))
+            if (lightActivity)
             {
-                raycastDistance = hit.distance - 0.3f;
-
-                if (raycastDistance > 5)
+                if (Physics.Raycast(raycast, out hit))
                 {
-                    raycastDistance = 5;
+                    raycastDistance = hit.distance - 0.3f;
+
+                    if (raycastDistance > 5)
+                    {
+                        raycastDistance = 5;
+                    }
+
+                    flashlight.intensity = Mathf.Lerp(flashlight.intensity, raycastDistance, dimTime);
+
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        lightActivity = false;
+                        flashlight.intensity = 0;
+                        GameManager.Instance.FlashOffSource.Play();
+                    }
                 }
-
-                flashlight.intensity = Mathf.Lerp(flashlight.intensity, raycastDistance, dimTime);
-
-                if(Input.GetKeyDown(KeyCode.F))
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-                    lightActivity = false;
-                    flashlight.intensity = 0;
+                    Physics.Raycast(raycast, out hit);
+
+                    raycastDistance = hit.distance - 0.3f;
+
+                    if (raycastDistance > 5)
+                    {
+                        raycastDistance = 5;
+                    }
+
+                    flashlight.intensity = Mathf.Lerp(flashlight.intensity, raycastDistance, dimTime);
+
+                    lightActivity = true;
+                    GameManager.Instance.FlashOnSource.Play();
                 }
             }
         }
-        else
-        {
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-                Physics.Raycast(raycast, out hit);
-
-                raycastDistance = hit.distance - 0.3f;
-
-                if (raycastDistance > 5)
-                {
-                    raycastDistance = 5;
-                }
-
-                flashlight.intensity = Mathf.Lerp(flashlight.intensity, raycastDistance, dimTime);
-
-                lightActivity = true;
-            }
-        }
+       
         
     }
 }

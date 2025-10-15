@@ -17849,6 +17849,8 @@ MonoBehaviour:
   raycastDistance: 0
   dimTime: 0.05
   flashlight: {fileID: 0}
+  FlashlightOn: {fileID: 0}
+  FlashlightOff: {fileID: 0}
   lightActivity: 1
 --- !u!1001 &824519701
 PrefabInstance:
