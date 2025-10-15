@@ -136,7 +136,7 @@ public class Controller : MonoBehaviour
 
             if(running)
             {
-                Stamina -= 1;
+                Stamina -= 0.3f;
                 SprintStamina.value = Stamina;
                 RecentlyRan = true;
             }
@@ -144,17 +144,17 @@ public class Controller : MonoBehaviour
             {
                 if (RecentlyRan)
                 {
-                    StaminaRefillDelay += Time.time * 0.005f;
+                    StaminaRefillDelay += Time.deltaTime;
 
-                    if(StaminaRefillDelay >= 5)
+                    if(StaminaRefillDelay >= 5f)
                     {
                         RecentlyRan = false;
-                        StaminaRefillDelay = 0;
+                        StaminaRefillDelay = 0f;
                     }
                 }
                 else if(!RecentlyRan)
                 {
-                    Stamina += 0.5f;
+                    Stamina += 0.1f;
                     SprintStamina.value = Stamina;
 
                     if(Stamina >= 100)
