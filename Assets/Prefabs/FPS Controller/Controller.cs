@@ -83,14 +83,14 @@ public class Controller : MonoBehaviour
         MainCamera.transform.localRotation = Quaternion.identity;
         m_CharacterController = GetComponent<CharacterController>();
 
-
-
         m_VerticalAngle = 0.0f;
         m_HorizontalAngle = transform.localEulerAngles.y;
     }
 
     void Update()
     {
+        MouseSensitivity = GameManager.Instance.MouseSensitivity;
+
         bool wasGrounded = m_Grounded;
         bool loosedGrounding = false;
 
