@@ -154,7 +154,7 @@ public class Controller : MonoBehaviour
         Vector3 move = Vector3.zero;
         if (!m_IsPaused && !LockControl)
         {
-            // Jump (we do it first as 
+
             if (m_Grounded)
             {
                 m_VerticalSpeed = JumpSpeed;

@@ -4218,7 +4218,7 @@ PrefabInstance:
     - target: {fileID: 3347484449434164017, guid: bad56f7b047c1844b8a98074b74d06eb,
         type: 3}
       propertyPath: m_Intensity
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3347484449434164017, guid: bad56f7b047c1844b8a98074b74d06eb,
         type: 3}
@@ -4253,7 +4253,7 @@ PrefabInstance:
     - target: {fileID: 3612941913030837693, guid: bad56f7b047c1844b8a98074b74d06eb,
         type: 3}
       propertyPath: m_Intensity
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3612941913030837693, guid: bad56f7b047c1844b8a98074b74d06eb,
         type: 3}
@@ -44886,7 +44886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LightObject: {fileID: 0}
   minIntensity: 0.5
-  maxIntensity: 3
+  maxIntensity: 2
   intensityTiming: 0.1
 --- !u!1001 &1935497914
 PrefabInstance:
